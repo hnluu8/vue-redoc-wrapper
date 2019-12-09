@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const Redoc = require('../../node_modules/redoc/bundles/redoc.standalone')
+import * as redoc from 'redoc/bundles/redoc.standalone'
 
 export default {
   name: "RedocWrapper",
@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted() {
-    Redoc.init(this.specOrSpecUrl, this.options_, document.getElementById('redoc-container'))
+    redoc.init(this.specOrSpecUrl, this.options_, document.getElementById('redoc-container'))
   }
 }
 </script>
