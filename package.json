@@ -1,5 +1,5 @@
 {
-  "name": "vue-redoc-wrapper",
+  "name": "@hnluu8/vue-redoc-wrapper",
   "version": "0.1.1",
   "private": true,
   "scripts": {
@@ -39,5 +39,8 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
