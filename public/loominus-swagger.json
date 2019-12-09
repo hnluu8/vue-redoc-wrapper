@@ -1,0 +1,621 @@
+{
+  "openapi": "3.0.2",
+  "servers": [
+    {
+      "url": "https://public-api.loominus.ai"
+    }
+  ],
+  "info": {
+    "description": "Don't have an API Key? [[Register]](https://public.loominus.ai/register)",
+    "title": "Loominus API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/teraport/v1": {
+      "post": {
+        "summary": "Stream event to its corresponding Data Stream's Staging Table.",
+        "description": "Send a JSON payload to Teraport to ingest and append to its corresponding Data Stream's Staging Table.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Api-Key",
+            "schema": {
+              "type": "string",
+              "description": "API access key"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event_type": {
+                    "type": "string",
+                    "description": "Data stream name"
+                  },
+                  "environment": {
+                    "type": "string",
+                    "description": "Staging environment",
+                    "enum": [
+                      "test",
+                      "production"
+                    ]
+                  },
+                  "event_source": {
+                    "type": "string",
+                    "description": "How the event is sent to Teraport",
+                    "enum": [
+                      "api",
+                      "test",
+                      "ui"
+                    ]
+                  },
+                  "payload": {
+                    "type": "string",
+                    "description": "JSON event payload"
+                  },
+                  "partition_key": {
+                    "type": "string",
+                    "description": "Optional partition key to help with distributing streamed data in a multi-shard deployment. If not given, Teraport will assign a random UUID as the partition key."
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "environment",
+                  "event_source",
+                  "payload"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "filter_messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "filter_type": {
+                                "type": "string"
+                              },
+                              "message": {
+                                "type": "string"
+                              },
+                              "sucess_rows": {
+                                "type": "integer"
+                              },
+                              "success_columns": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "error_columns": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "partial_errors": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "error": {
+                                "type": "string"
+                              },
+                              "payload": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl -d '{\"event_type\":\"MyDataStream\",\"environment\":\"test\",\"event_source\":\"api\",\"payload\":\"{\\\"field1\\\": \\\"value1\\\", \\\"field2\\\": \\\"value2\\\", \\\"field3\\\": \\\"value3\\\"}\"}' -H \"X-Api-Key: Replace with Teraport API Key\" -H \"Content-Type: application/json\" -X POST https://public-api.loominus.ai/teraport/v1\n                    "
+          }
+        ]
+      }
+    },
+    "/predictive/v1/modops/models/deployed/{model_id}": {
+      "get": {
+        "summary": "Get deployed Predictive Model metadata",
+        "description": "Get metadata for a deployed Predictive Model by its ID.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Api-Key",
+            "schema": {
+              "type": "string",
+              "description": "API access key"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "model_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "UUID of deployed Predictive Model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "deployment_info": {
+                          "type": "object",
+                          "properties": {
+                            "version": {
+                              "type": "integer"
+                            },
+                            "featurized_feature_columns": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "project_type": {
+                              "type": "string"
+                            },
+                            "created_by": {
+                              "type": "string"
+                            },
+                            "updated_timestamp": {
+                              "type": "integer"
+                            },
+                            "model_type": {
+                              "type": "string"
+                            },
+                            "model_id": {
+                              "type": "string"
+                            },
+                            "model_source": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "enabled": {
+                              "type": "boolean"
+                            },
+                            "project_name": {
+                              "type": "string"
+                            },
+                            "updated_datetime": {
+                              "type": "string"
+                            },
+                            "algorithm": {
+                              "type": "string"
+                            },
+                            "created_datetime": {
+                              "type": "string"
+                            },
+                            "feature_count": {
+                              "type": "integer"
+                            },
+                            "created_timestamp": {
+                              "type": "integer"
+                            },
+                            "provider": {
+                              "type": "string"
+                            },
+                            "project_id": {
+                              "type": "string"
+                            },
+                            "author": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "model_record": {
+                          "type": "object",
+                          "properties": {
+                            "version": {
+                              "type": "integer"
+                            },
+                            "project_type": {
+                              "type": "string"
+                            },
+                            "created_by": {
+                              "type": "string"
+                            },
+                            "updated_timestamp": {
+                              "type": "integer"
+                            },
+                            "model_type": {
+                              "type": "string"
+                            },
+                            "model_id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "updated_datetime": {
+                              "type": "string"
+                            },
+                            "created_datetime": {
+                              "type": "string"
+                            },
+                            "created_timestamp": {
+                              "type": "integer"
+                            },
+                            "project_id": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "model_info": {
+                              "type": "object",
+                              "properties": {
+                                "feature_columns": {
+                                  "type": "array",
+                                  "description": "The input columns for making predictions.",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "duration_seconds_train": {
+                                  "type": "number"
+                                },
+                                "model_type": {
+                                  "type": "string"
+                                },
+                                "provider_version": {
+                                  "type": "string"
+                                },
+                                "binary_classification_true_label": {
+                                  "type": "string"
+                                },
+                                "target_column": {
+                                  "type": "string"
+                                },
+                                "featurized_feature_columns": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "group_columns": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "provider": {
+                                  "type": "string"
+                                },
+                                "training_params": {
+                                  "type": "object"
+                                },
+                                "test_split_percentage": {
+                                  "type": "number"
+                                },
+                                "duration_seconds_train_test_split": {
+                                  "type": "number"
+                                },
+                                "core_library_versions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "version": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "train_mode": {
+                                  "type": "string"
+                                },
+                                "algorithm": {
+                                  "type": "string"
+                                },
+                                "provider_train_results": {
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl -H \"X-Api-Key: Replace with ModOps API Key\" -X GET https://public-api.loominus.ai/predictive/v1/modops/models/deployed/:id\n                    "
+          }
+        ]
+      },
+      "post": {
+        "summary": "Make predictions",
+        "description": "Send input data to a Predictive Model to make predictions. **It is the caller's responsibility to store the returned request_id of each prediction in order to inform ModOps of the prediction's actual outcome.**",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Api-Key",
+            "schema": {
+              "type": "string",
+              "description": "API access key"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "model_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "UUID of deployed Predictive Model"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of arrays of values corresponding to the Predictive Model's feature columns. Order of the values matters!!!",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "secondary_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "predicted_probabilities": {
+                          "type": "array",
+                          "description": "Only pertains to Classifier models.",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "predicted_value": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "boolean"
+                              }
+                            ]
+                          }
+                        },
+                        "request_id": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "model_id": {
+                          "type": "string"
+                        },
+                        "prediction_datetime": {
+                          "type": "string"
+                        },
+                        "secondary_id": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "classes": {
+                          "type": "array",
+                          "description": "Only pertains to Classifier models.",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "boolean"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl -d '{\"data\":[\"feature_column_1_value\", \"feature_column_2_value\", \"feature_column_3_value\"]}' -H \"X-Api-Key: Replace with ModOps API Key\" -H \"Content-Type: application/json\" -X POST https://public-api.loominus.ai/predictive/v1/modops/models/deployed/:id\n                    "
+          }
+        ]
+      },
+      "put": {
+        "summary": "Inform ModOps of the actual outcomes of predictions",
+        "description": "Send the actual value that is the outcome for a specific prediction request.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Api-Key",
+            "schema": {
+              "type": "string",
+              "description": "API access key"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "model_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "UUID of deployed Predictive Model"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "request_id": {
+                      "type": "string"
+                    },
+                    "actual_value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "boolean"
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl -d '{\"request_id\":\"prediction_request_id\", \"actual_value\":\"actual_outcome\"}' -H \"X-Api-Key: Replace with ModOps API Key\" -H \"Content-Type: application/json\" -X PUT https://public-api.loominus.ai/predictive/v1/modops/models/deployed/:id\n                    "
+          }
+        ]
+      }
+    }
+  }
+}
