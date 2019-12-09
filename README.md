@@ -9,8 +9,8 @@ npm install @hnluu8/vue-redoc-wrapper --save
 ```
 
 ## Usage
-Pass the [OpenAPI definitions](https://swagger.io/specification/#schema) for your API to the spec-or-spec-url attribute of the component. 
-The attribute value can be given as an object or as a URL to the JSON or YAML file of your API documentation. 
+Pass the [OpenAPI definitions](https://swagger.io/specification/#schema) of your API to the spec-or-spec-url attribute of the component. 
+The attribute value can be given as an object or as a URL to the JSON or YAML file for your API documentation. 
 
 ```html
 <template>
