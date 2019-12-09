@@ -2,7 +2,8 @@
   "name": "@hnluu8/vue-redoc-wrapper",
   "version": "0.1.11",
   "description": "A Vue.js wrapper component for ReDoc",
-  "main": "./dist/vue-redoc-wrapper.umd.min.js",
+  "main": "dist/vue-redoc-wrapper.umd.js",
+  "unpkg": "dist/vue-redoc-wrapper.umd.min.js",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -46,10 +47,7 @@
     "last 2 versions"
   ],
   "files": [
-    "./dist/vue-redoc-wrapper.umd.js",
-    "./dist/vue-redoc-wrapper.umd.js.map",
-    "./dist/vue-redoc-wrapper.umd.min.js",
-    "./dist/vue-redoc-wrapper.umd.min.js.map"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
