@@ -1,5 +1,5 @@
 <template>
-    <redoc-wrapper :spec-or-spec-url="'/loominus-swagger.json'"></redoc-wrapper>
+    <redoc-wrapper :spec-or-spec-url="'http://petstore.swagger.io/v2/swagger.json'"></redoc-wrapper>
 </template>
 
 <script>

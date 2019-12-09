@@ -16,11 +16,11 @@ export default {
         openapi: "3.0.2",
         servers: [
           {
-            url: "https://public-api.loominus.ai"
+            url: "https://try-api.loominus.ai"
           }
         ],
         info: {
-          description: "Don't have an API Key? [[Register]](https://public.loominus.ai/register)",
+          description: "Don't have an API Key? [[Register]](https://try.loominus.ai/register)",
           title: "Loominus API",
           version: "1.0.0"
         },
