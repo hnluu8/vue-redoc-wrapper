@@ -1,6 +1,6 @@
 {
   "name": "@hnluu8/vue-redoc-wrapper",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A Vue.js wrapper component for ReDoc",
   "main": "./dist/vue-redoc-wrapper.umd.min.js",
   "license": "MIT",
