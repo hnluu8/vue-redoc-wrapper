@@ -1,8 +1,8 @@
 {
-  "name": "@hnluu8/vue-redoc-wrapper",
-  "version": "0.1.5",
+  "name": "vue-redoc-wrapper",
+  "version": "0.1.0",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --target lib --name vue-redoc-wrapper src/main.js",
@@ -40,12 +40,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "files": [
-    "dist/*"
-  ],
-  "main": "./dist/vue-redoc-wrapper.common.js",
-  "publishConfig": {
-    "access": "public"
-  }
+  ]
 }
