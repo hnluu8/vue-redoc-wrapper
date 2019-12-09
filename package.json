@@ -1,15 +1,19 @@
 {
-  "name": "vue-redoc-wrapper",
-  "version": "0.1.0",
+  "name": "@hnluu8/vue-redoc-wrapper",
+  "version": "0.1.10",
+  "description": "A Vue.js wrapper component for ReDoc",
+  "main": "./dist/vue-redoc-wrapper.umd.min.js",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --target lib --name vue-redoc-wrapper src/main.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.4.3",
+    "core-js": "^3.4.3"
+  },
+  "peerDependencies": {
     "vue": "^2.6.10",
     "null": "^2.0.0",
     "redoc": "^2.0.0-rc.18"
@@ -40,5 +44,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "files": [
+    "./dist/vue-redoc-wrapper.umd.js",
+    "./dist/vue-redoc-wrapper.umd.js.map",
+    "./dist/vue-redoc-wrapper.umd.min.js",
+    "./dist/vue-redoc-wrapper.umd.min.js.map"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
