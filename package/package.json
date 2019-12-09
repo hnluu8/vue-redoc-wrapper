@@ -9,7 +9,10 @@
   "author": "Hung Luu",
   "license": "MIT",
   "files": [
-    "../dist/vue-redoc-wrapper.umd.*"
+    "../dist/vue-redoc-wrapper.umd.js",
+    "../dist/vue-redoc-wrapper.umd.js.map",
+    "../dist/vue-redoc-wrapper.umd.min.js",
+    "../dist/vue-redoc-wrapper.umd.min.js.map"
   ],
   "publishConfig": {
     "access": "public"
