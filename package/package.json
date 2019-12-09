@@ -4,7 +4,7 @@
   "description": "A Vue.js wrapper component for ReDoc",
   "main": "../dist/vue-redoc-wrapper.umd.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\""
   },
   "author": "Hung Luu",
   "license": "MIT",
