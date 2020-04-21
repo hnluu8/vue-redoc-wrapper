@@ -15,7 +15,7 @@ The attribute value can be given as an object or as a URL to the JSON or YAML fi
 ```html
 <template>
   <div id="app">
-    <redoc-wrapper :spec-or-spec-url="'http://petstore.swagger.io/v2/swagger.json'"></redoc-wrapper>
+    <redoc-wrapper :spec-or-spec-url="'http://petstore.swagger.io/v2/swagger.json'" :options="redocOptions"></redoc-wrapper>
   </div>
 </template>
 
@@ -26,6 +26,14 @@ export default {
   name: 'app',
   components: {
     RedocWrapper
+  },
+  data() {
+    return {
+      // https://github.com/Redocly/redoc#redoc-options-object
+      redocOptions: {
+        hideDownloadButton: false      
+      }
+    }
   }
 }
 </script>

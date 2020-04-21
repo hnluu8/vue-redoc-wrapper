@@ -1,5 +1,5 @@
 <template>
-    <redoc-wrapper :spec-or-spec-url="'http://petstore.swagger.io/v2/swagger.json'"></redoc-wrapper>
+    <redoc-wrapper :spec-or-spec-url="'http://petstore.swagger.io/v2/swagger.json'" :options="redocOptions"></redoc-wrapper>
 </template>
 
 <script>
@@ -9,6 +9,14 @@ export default {
   name: 'SpecUrlExample',
   components: {
     RedocWrapper
+  },
+  data() {
+    return {
+      // https://github.com/Redocly/redoc#redoc-options-object
+      redocOptions: {
+        hideDownloadButton: false
+      }
+    }
   }
 }
 </script>
